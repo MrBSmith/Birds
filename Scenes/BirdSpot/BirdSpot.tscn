@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://csjxc788frim2"]
+
+[node name="BirdSpot" type="Marker2D" groups=["BirdSpot"]]
+position = Vector2(297, 40)

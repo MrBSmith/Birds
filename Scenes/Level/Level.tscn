@@ -1,0 +1,80 @@
+[gd_scene load_steps=4 format=3 uid="uid://kl0yj0cvsfle"]
+
+[ext_resource type="PackedScene" uid="uid://dy5epydyhetu0" path="res://Scenes/Birds/Bird.tscn" id="1_knci5"]
+[ext_resource type="Texture2D" uid="uid://tld5si3pb0r0" path="res://Scenes/Level/Sprite/Branches.png" id="2_cybey"]
+[ext_resource type="PackedScene" uid="uid://csjxc788frim2" path="res://Scenes/BirdSpot/BirdSpot.tscn" id="3_uckby"]
+
+[node name="Level" type="Node2D"]
+
+[node name="Bird" parent="." instance=ExtResource("1_knci5")]
+position = Vector2(295, 42)
+color = Color(0.74902, 0.278431, 0.356863, 1)
+
+[node name="Bird2" parent="." instance=ExtResource("1_knci5")]
+position = Vector2(65, 33)
+color = Color(0.537255, 0.45098, 0.278431, 1)
+
+[node name="Bird3" parent="." instance=ExtResource("1_knci5")]
+position = Vector2(9, 138)
+
+[node name="Bird4" parent="." instance=ExtResource("1_knci5")]
+position = Vector2(239, 169)
+color = Color(0.239216, 0.172549, 0.129412, 1)
+
+[node name="BranchesLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="BranchesLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_cybey")
+metadata/_edit_lock_ = true
+
+[node name="BirdSpots" type="Node2D" parent="."]
+
+[node name="BirdSpot" parent="BirdSpots" instance=ExtResource("3_uckby")]
+
+[node name="BirdSpot7" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(311, 39)
+
+[node name="BirdSpot2" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(274, 103)
+
+[node name="BirdSpot8" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(269, 126)
+
+[node name="BirdSpot9" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(304, 112)
+
+[node name="BirdSpot3" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(17, 134)
+
+[node name="BirdSpot10" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(12, 58)
+
+[node name="BirdSpot11" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(41, 35)
+
+[node name="BirdSpot12" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(57, 26)
+
+[node name="BirdSpot13" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(70, 172)
+
+[node name="BirdSpot14" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(86, 158)
+
+[node name="BirdSpot15" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(261, 175)
+
+[node name="BirdSpot4" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(111, 158)
+
+[node name="BirdSpot5" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(240, 155)
+
+[node name="BirdSpot6" parent="BirdSpots" instance=ExtResource("3_uckby")]
+position = Vector2(55, 42)

@@ -1,0 +1,6 @@
+[submodule "addons/StateGraph"]
+	path = addons/StateGraph
+	url = https://github.com/MrBSmith/StateGraph
+[submodule "BabaGodotLib"]
+	path = BabaGodotLib
+	url = https://github.com/MrBSmith/BabaGodotLib
