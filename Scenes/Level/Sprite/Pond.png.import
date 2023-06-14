@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tpfodt7p38ee"
-path="res://.godot/imported/BirdBeak.png-a7323aa7f276a94a8cd8038bde9b8695.ctex"
+uid="uid://74kkgrtwbnds"
+path="res://.godot/imported/Pond.png-229d5551ac769a6c4068209638c52883.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Birds/Sprites/BirdBeak.png"
-dest_files=["res://.godot/imported/BirdBeak.png-a7323aa7f276a94a8cd8038bde9b8695.ctex"]
+source_file="res://Scenes/Level/Sprite/Pond.png"
+dest_files=["res://.godot/imported/Pond.png-229d5551ac769a6c4068209638c52883.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gwsquxnyxcag"
-path="res://.godot/imported/BirdBody.png-75a0367e0309f618c19d108c8c80584b.ctex"
+uid="uid://cibcyrgn1hyjt"
+path="res://.godot/imported/Duck.png-233bc8de55e71c95639442d70d54ca93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Birds/Sprites/BirdBody.png"
-dest_files=["res://.godot/imported/BirdBody.png-75a0367e0309f618c19d108c8c80584b.ctex"]
+source_file="res://Scenes/Birds/Duck/Sprites/Duck.png"
+dest_files=["res://.godot/imported/Duck.png-233bc8de55e71c95639442d70d54ca93.ctex"]
 
 [params]
 

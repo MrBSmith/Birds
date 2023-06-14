@@ -1,0 +1,117 @@
+[gd_scene load_steps=19 format=3 uid="uid://qx44bntx5nah"]
+
+[ext_resource type="PackedScene" uid="uid://c72l32fsdt8sd" path="res://Scenes/Birds/BirdAbstract/Bird.tscn" id="1_j40vl"]
+[ext_resource type="Texture2D" uid="uid://db0r1spvs7dcg" path="res://Scenes/Birds/Ostrich/Sprites/Ostrich.png" id="2_nd56h"]
+[ext_resource type="Script" path="res://Scenes/Birds/States/IdleState_Bird.gd" id="3_xnfjn"]
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateEvent.gd" id="4_4rsly"]
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/State.gd" id="4_gqgkf"]
+[ext_resource type="Script" path="res://Scenes/Birds/FlyComponent.gd" id="4_txsqk"]
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateConnection.gd" id="5_gdklw"]
+[ext_resource type="Script" path="res://Components/SeekDestComponent.gd" id="8_hgukr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jr20p"]
+atlas = ExtResource("2_nd56h")
+region = Rect2(0, 0, 48, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61b2x"]
+atlas = ExtResource("2_nd56h")
+region = Rect2(48, 0, 48, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m4ue"]
+atlas = ExtResource("2_nd56h")
+region = Rect2(96, 0, 48, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ct76e"]
+atlas = ExtResource("2_nd56h")
+region = Rect2(144, 0, 48, 72)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i76mj"]
+atlas = ExtResource("2_nd56h")
+region = Rect2(192, 0, 48, 72)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mt8xl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jr20p")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61b2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m4ue")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ct76e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i76mj")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 10.0
+}]
+
+[sub_resource type="Resource" id="Resource_277dy"]
+script = ExtResource("4_4rsly")
+conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
+trigger = "started_moving"
+emitter_path = NodePath("../../WalkComponent")
+
+[sub_resource type="Resource" id="Resource_pfmt8"]
+script = ExtResource("5_gdklw")
+to = NodePath("StateMachine/Walk")
+events = Array[ExtResource("4_4rsly")]([SubResource("Resource_277dy")])
+
+[sub_resource type="Resource" id="Resource_2p18l"]
+script = ExtResource("4_4rsly")
+conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
+trigger = "stopped_moving"
+emitter_path = NodePath("../../WalkComponent")
+
+[sub_resource type="Resource" id="Resource_lm7x1"]
+script = ExtResource("5_gdklw")
+to = NodePath("StateMachine/Idle")
+events = Array[ExtResource("4_4rsly")]([SubResource("Resource_2p18l")])
+
+[node name="Ostrich" instance=ExtResource("1_j40vl")]
+z_index = -1
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2(0, -36)
+sprite_frames = SubResource("SpriteFrames_mt8xl")
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("walk_component", "seek_spot_component", "wait_timer")]
+script = ExtResource("3_xnfjn")
+walk_component = NodePath("../../WalkComponent")
+seek_spot_component = NodePath("../../SeekLandSpotComponent")
+wait_timer = NodePath("Timer")
+avg_wait_time = 5.0
+wait_time_variance = 2.0
+no_default_state = true
+connections_array = Array[ExtResource("5_gdklw")]([SubResource("Resource_pfmt8")])
+graph_position = Vector2(0.244159, 0.377953)
+
+[node name="Timer" type="Timer" parent="StateMachine/Idle" index="0"]
+one_shot = true
+
+[node name="Walk" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("4_gqgkf")
+connections_array = Array[ExtResource("5_gdklw")]([SubResource("Resource_lm7x1")])
+graph_position = Vector2(0.558411, 0.354331)
+
+[node name="WalkComponent" type="Node" parent="." index="2" node_paths=PackedStringArray("holder")]
+script = ExtResource("4_txsqk")
+holder = NodePath("..")
+
+[node name="SeekLandSpotComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("holder")]
+script = ExtResource("8_hgukr")
+land_spots = 2
+holder = NodePath("..")
+
+[connection signal="direction_changed" from="WalkComponent" to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]
