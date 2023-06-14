@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv4cvj6qn52a4"
-path="res://.godot/imported/BirdPaws.png-e17e47451febbd0c7a3fd8a3c4c86de5.ctex"
+uid="uid://bv5v6kivyqph4"
+path="res://.godot/imported/Sparrow.png-73d5271239712fd41093be7349d8b658.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Birds/Sprites/BirdPaws.png"
-dest_files=["res://.godot/imported/BirdPaws.png-e17e47451febbd0c7a3fd8a3c4c86de5.ctex"]
+source_file="res://Scenes/Birds/Sparrow/Sprites/Sparrow.png"
+dest_files=["res://.godot/imported/Sparrow.png-73d5271239712fd41093be7349d8b658.ctex"]
 
 [params]
 

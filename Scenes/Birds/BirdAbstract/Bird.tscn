@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://c72l32fsdt8sd"]
+
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/StateMachine.gd" id="6_wv1rv"]
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/StateLabel.gd" id="11_kjx2o"]
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/StateAnimationHandler/StateAnimationHandler.gd" id="12_387j2"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_itey1"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Bird" type="Node2D"]
+z_index = 6
+
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_itey1")
+animation = &"Idle"
+
+[node name="StateMachine" type="Node2D" parent="."]
+script = ExtResource("6_wv1rv")
+
+[node name="StateLabel" type="Label" parent="StateMachine"]
+visible = false
+offset_left = -20.0
+offset_top = -33.0
+offset_right = 20.0
+offset_bottom = -10.0
+script = ExtResource("11_kjx2o")
+
+[node name="StateAnimationHandler" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_sprite")]
+script = ExtResource("12_387j2")
+animated_sprite = NodePath("../../AnimatedSprite")
+anim_name_mode = 0
+flip_mode = 1

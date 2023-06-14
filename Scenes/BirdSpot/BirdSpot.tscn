@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://csjxc788frim2"]
+[gd_scene load_steps=2 format=3 uid="uid://csjxc788frim2"]
+
+[ext_resource type="Script" path="res://Scenes/BirdSpot/BirdSpot.gd" id="1_yrrg3"]
 
 [node name="BirdSpot" type="Marker2D" groups=["BirdSpot"]]
-position = Vector2(297, 40)
+script = ExtResource("1_yrrg3")

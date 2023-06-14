@@ -1,0 +1,173 @@
+[gd_scene load_steps=23 format=3 uid="uid://dpkuwn7mx7og2"]
+
+[ext_resource type="PackedScene" uid="uid://c72l32fsdt8sd" path="res://Scenes/Birds/BirdAbstract/Bird.tscn" id="1_c7fei"]
+[ext_resource type="Texture2D" uid="uid://cibcyrgn1hyjt" path="res://Scenes/Birds/Duck/Sprites/Duck.png" id="2_70jmw"]
+[ext_resource type="Script" path="res://Scenes/Birds/States/IdleState_Bird.gd" id="2_fmow7"]
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/State.gd" id="3_6261f"]
+[ext_resource type="Script" path="res://Components/SeekDestComponent.gd" id="4_ttlop"]
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateEvent.gd" id="5_liocl"]
+[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateConnection.gd" id="6_8gq40"]
+[ext_resource type="Script" path="res://Components/MoveComponent.gd" id="8_cuh08"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfnc1"]
+atlas = ExtResource("2_70jmw")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rs5g7"]
+atlas = ExtResource("2_70jmw")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k13y"]
+atlas = ExtResource("2_70jmw")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhvm5"]
+atlas = ExtResource("2_70jmw")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0kwwg"]
+atlas = ExtResource("2_70jmw")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vtqc2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfnc1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rs5g7")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k13y")
+}],
+"loop": true,
+"name": &"IdleFloor",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhvm5")
+}],
+"loop": true,
+"name": &"IdleWater",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0kwwg")
+}],
+"loop": true,
+"name": &"Swim",
+"speed": 5.0
+}]
+
+[sub_resource type="Resource" id="Resource_ote0b"]
+script = ExtResource("5_liocl")
+conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
+trigger = "started_moving"
+emitter_path = NodePath("../../FlyComponent")
+
+[sub_resource type="Resource" id="Resource_jk6cv"]
+script = ExtResource("6_8gq40")
+to = NodePath("StateMachine/Fly")
+events = Array[ExtResource("5_liocl")]([SubResource("Resource_ote0b")])
+
+[sub_resource type="Resource" id="Resource_4540i"]
+script = ExtResource("5_liocl")
+conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
+trigger = "started_moving"
+emitter_path = NodePath("../../SwimComponent")
+
+[sub_resource type="Resource" id="Resource_5td17"]
+script = ExtResource("6_8gq40")
+to = NodePath("StateMachine/Swim")
+events = Array[ExtResource("5_liocl")]([SubResource("Resource_4540i")])
+
+[sub_resource type="Resource" id="Resource_v4w3c"]
+script = ExtResource("5_liocl")
+conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
+trigger = "stopped_moving"
+emitter_path = NodePath("../../FlyComponent")
+
+[sub_resource type="Resource" id="Resource_nq4fh"]
+script = ExtResource("6_8gq40")
+to = NodePath("StateMachine/Idle")
+events = Array[ExtResource("5_liocl")]([SubResource("Resource_v4w3c")])
+
+[sub_resource type="Resource" id="Resource_fx1yp"]
+script = ExtResource("5_liocl")
+conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
+trigger = "stopped_moving"
+emitter_path = NodePath("../../SwimComponent")
+
+[sub_resource type="Resource" id="Resource_ss2ln"]
+script = ExtResource("6_8gq40")
+to = NodePath("StateMachine/Idle")
+events = Array[ExtResource("5_liocl")]([SubResource("Resource_fx1yp")])
+
+[node name="Duck" instance=ExtResource("1_c7fei")]
+z_index = 6
+
+[node name="AnimatedSprite" parent="." index="0"]
+position = Vector2(0, -13)
+sprite_frames = SubResource("SpriteFrames_vtqc2")
+animation = &"IdleFloor"
+
+[node name="StateMachine" parent="." index="1"]
+connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_jk6cv"), SubResource("Resource_5td17"), SubResource("Resource_nq4fh")])
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("fly_component", "swim_component", "seek_spot_component", "wait_timer", "default_state")]
+script = ExtResource("2_fmow7")
+fly_component = NodePath("../../FlyComponent")
+swim_component = NodePath("../../SwimComponent")
+seek_spot_component = NodePath("../../SeekLandSpotComponent")
+wait_timer = NodePath("WaitTimer")
+avg_wait_time = 3.0
+wait_time_variance = 1.0
+default_state = NodePath("Floor")
+reset_to_default = true
+connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_jk6cv"), SubResource("Resource_5td17")])
+graph_position = Vector2(0.403037, 0.30315)
+
+[node name="Floor" type="Node" parent="StateMachine/Idle" index="0"]
+script = ExtResource("3_6261f")
+
+[node name="Water" type="Node" parent="StateMachine/Idle" index="1"]
+script = ExtResource("3_6261f")
+
+[node name="WaitTimer" type="Timer" parent="StateMachine/Idle" index="2"]
+
+[node name="Fly" type="Node" parent="StateMachine" index="1"]
+script = ExtResource("3_6261f")
+connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_nq4fh")])
+graph_position = Vector2(0.689252, 0.622047)
+
+[node name="Swim" type="Node" parent="StateMachine" index="2"]
+script = ExtResource("3_6261f")
+connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_ss2ln")])
+graph_position = Vector2(0.713785, 0.0433071)
+
+[node name="StateAnimationHandler" parent="StateMachine" index="4"]
+anim_name_mode = 2
+
+[node name="SeekLandSpotComponent" type="Node" parent="." index="2" node_paths=PackedStringArray("holder")]
+script = ExtResource("4_ttlop")
+land_spots = 5
+holder = NodePath("..")
+
+[node name="FlyComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("holder")]
+script = ExtResource("8_cuh08")
+holder = NodePath("..")
+
+[node name="SwimComponent" type="Node" parent="." index="4" node_paths=PackedStringArray("holder")]
+script = ExtResource("8_cuh08")
+holder = NodePath("..")
+
+[connection signal="direction_changed" from="FlyComponent" to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]
+[connection signal="direction_changed" from="SwimComponent" to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tld5si3pb0r0"
-path="res://.godot/imported/Branches.png-187d21f073b9bcd7105d32479fa4766f.ctex"
+uid="uid://cibcyrgn1hyjt"
+path="res://.godot/imported/Duck.png-233bc8de55e71c95639442d70d54ca93.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Level/Sprite/Branches.png"
-dest_files=["res://.godot/imported/Branches.png-187d21f073b9bcd7105d32479fa4766f.ctex"]
+source_file="res://Scenes/Birds/Duck/Sprites/Duck.png"
+dest_files=["res://.godot/imported/Duck.png-233bc8de55e71c95639442d70d54ca93.ctex"]
 
 [params]
 
