@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://Scenes/Birds/States/IdleState_Bird.gd" id="3_xnfjn"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateEvent.gd" id="4_4rsly"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/State.gd" id="4_gqgkf"]
-[ext_resource type="Script" path="res://Scenes/Birds/FlyComponent.gd" id="4_txsqk"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateConnection.gd" id="5_gdklw"]
+[ext_resource type="Script" path="res://Components/MoveComponent.gd" id="7_habbl"]
 [ext_resource type="Script" path="res://Components/SeekDestComponent.gd" id="8_hgukr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jr20p"]
@@ -106,7 +106,7 @@ connections_array = Array[ExtResource("5_gdklw")]([SubResource("Resource_lm7x1")
 graph_position = Vector2(0.558411, 0.354331)
 
 [node name="WalkComponent" type="Node" parent="." index="2" node_paths=PackedStringArray("holder")]
-script = ExtResource("4_txsqk")
+script = ExtResource("7_habbl")
 holder = NodePath("..")
 
 [node name="SeekLandSpotComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("holder")]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://tld5si3pb0r0"
-path="res://.godot/imported/Branches.png-187d21f073b9bcd7105d32479fa4766f.ctex"
+uid="uid://oai4yjpkbxxs"
+path="res://.godot/imported/BirdBranches.png-140d71d71998f00eac38d1dec73958f8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Level/Sprite/Branches.png"
-dest_files=["res://.godot/imported/Branches.png-187d21f073b9bcd7105d32479fa4766f.ctex"]
+source_file="res://Scenes/Level/Sprite/BirdBranches.png"
+dest_files=["res://.godot/imported/BirdBranches.png-140d71d71998f00eac38d1dec73958f8.ctex"]
 
 [params]
 

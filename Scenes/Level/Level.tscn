@@ -1,44 +1,80 @@
-[gd_scene load_steps=8 format=3 uid="uid://kl0yj0cvsfle"]
+[gd_scene load_steps=16 format=3 uid="uid://kl0yj0cvsfle"]
 
-[ext_resource type="Texture2D" uid="uid://74kkgrtwbnds" path="res://Scenes/Level/Sprite/Pond.png" id="2_6el7w"]
-[ext_resource type="Texture2D" uid="uid://tld5si3pb0r0" path="res://Scenes/Level/Sprite/Branches.png" id="2_cybey"]
+[ext_resource type="Texture2D" uid="uid://y60vc75ji1jg" path="res://Scenes/Level/Sprite/BirdBackground.png" id="1_8s2wt"]
+[ext_resource type="Texture2D" uid="uid://oai4yjpkbxxs" path="res://Scenes/Level/Sprite/BirdBranches.png" id="2_738kt"]
+[ext_resource type="Shader" path="res://Shaders/WindFoliage.gdshader" id="2_glpsx"]
+[ext_resource type="Texture2D" uid="uid://chkhh18qytxjj" path="res://Scenes/Level/Sprite/BirdForeground.png" id="3_67eb4"]
 [ext_resource type="Script" path="res://Scenes/Level/SwimLine.gd" id="3_fet64"]
 [ext_resource type="PackedScene" uid="uid://csjxc788frim2" path="res://Scenes/BirdSpot/BirdSpot.tscn" id="3_uckby"]
+[ext_resource type="Texture2D" uid="uid://b83462m33xvrn" path="res://Scenes/Level/Sprite/BirdFoliage.png" id="3_wc467"]
 [ext_resource type="PackedScene" uid="uid://dy5epydyhetu0" path="res://Scenes/Birds/Sparrow/Sparrow.tscn" id="4_im8iu"]
 [ext_resource type="PackedScene" uid="uid://dpkuwn7mx7og2" path="res://Scenes/Birds/Duck/Duck.tscn" id="5_flcm4"]
 [ext_resource type="PackedScene" uid="uid://qx44bntx5nah" path="res://Scenes/Birds/Ostrich/Ostrich.tscn" id="7_k6oi0"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y8vbg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kta4y"]
+noise = SubResource("FastNoiseLite_y8vbg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_47s8b"]
+frequency = 0.03
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pquvh"]
+noise = SubResource("FastNoiseLite_47s8b")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cmupo"]
+shader = ExtResource("2_glpsx")
+shader_parameter/deform1 = Vector2(0.002, 0.002)
+shader_parameter/deform2 = Vector2(-0.005, 0.006)
+shader_parameter/speed1 = 1.0
+shader_parameter/speed2 = 2.621
+shader_parameter/noise1 = SubResource("NoiseTexture2D_kta4y")
+shader_parameter/noise2 = SubResource("NoiseTexture2D_pquvh")
+
 [node name="Level" type="Node2D"]
 
-[node name="DecorationLayer" type="CanvasLayer" parent="."]
-layer = -1
+[node name="DecorationLayer" type="Node2D" parent="."]
+
+[node name="Background" type="TextureRect" parent="DecorationLayer"]
+z_index = -2
+z_as_relative = false
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("1_8s2wt")
+metadata/_edit_lock_ = true
+
+[node name="Foliage" type="TextureRect" parent="DecorationLayer"]
+z_index = 2
+z_as_relative = false
+material = SubResource("ShaderMaterial_cmupo")
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("3_wc467")
+metadata/_edit_lock_ = true
 
 [node name="Branches" type="TextureRect" parent="DecorationLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_cybey")
+z_index = 2
+z_as_relative = false
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("2_738kt")
 metadata/_edit_lock_ = true
 
-[node name="Pond" type="TextureRect" parent="DecorationLayer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_6el7w")
+[node name="Foreground" type="TextureRect" parent="DecorationLayer"]
+z_index = 5
+z_as_relative = false
+offset_right = 320.0
+offset_bottom = 180.0
+texture = ExtResource("3_67eb4")
+metadata/_edit_lock_ = true
 
-[node name="SwimLine" type="ReferenceRect" parent="DecorationLayer/Pond" groups=["SwimLine"]]
-layout_mode = 0
-offset_left = 37.0
-offset_top = 170.0
-offset_right = 287.0
-offset_bottom = 170.0
+[node name="SwimLine" type="ReferenceRect" parent="DecorationLayer" groups=["SwimLine"]]
+offset_left = 109.0
+offset_top = 176.0
+offset_right = 279.0
+offset_bottom = 176.0
 script = ExtResource("3_fet64")
 bird_spot_type = 4
-metadata/_edit_lock_ = true
 
 [node name="WalkLine" type="ReferenceRect" parent="DecorationLayer" groups=["WalkLine"]]
 anchors_preset = 8
@@ -46,10 +82,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -140.0
-offset_top = 32.0
-offset_right = 140.0
-offset_bottom = 32.0
+offset_left = 20.0
+offset_top = 117.0
+offset_right = 300.0
+offset_bottom = 117.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("3_fet64")
@@ -59,34 +95,31 @@ metadata/_edit_lock_ = true
 [node name="BirdSpots" type="Node2D" parent="."]
 
 [node name="BirdSpot" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(274, 32)
+position = Vector2(283, 31)
 
 [node name="BirdSpot7" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(304, 39)
+position = Vector2(301, 39)
 
 [node name="BirdSpot2" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(274, 103)
+position = Vector2(282, 91)
 
 [node name="BirdSpot8" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(269, 126)
+position = Vector2(280, 119)
 
 [node name="BirdSpot9" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(298, 111)
+position = Vector2(299, 114)
 
 [node name="BirdSpot3" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(17, 134)
+position = Vector2(14, 136)
 
 [node name="BirdSpot10" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(19, 55)
+position = Vector2(11, 62)
 
 [node name="BirdSpot11" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(41, 35)
-
-[node name="BirdSpot12" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(60, 30)
+position = Vector2(51, 43)
 
 [node name="BirdSpot6" parent="BirdSpots" instance=ExtResource("3_uckby")]
-position = Vector2(55, 42)
+position = Vector2(34, 46)
 
 [node name="Birds" type="Node2D" parent="."]
 

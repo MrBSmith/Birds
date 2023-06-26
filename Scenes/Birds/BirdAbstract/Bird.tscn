@@ -13,7 +13,7 @@ animations = [{
 }]
 
 [node name="Bird" type="Node2D"]
-z_index = 1
+z_index = 6
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_itey1")

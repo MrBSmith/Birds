@@ -16,7 +16,7 @@ const NO_MOVABLE_ERROR = "This node doesn't have any usable MoveComponent, it ca
 @export var wait_timer : Timer
 
 @export_range(0.0, 99.0) var avg_wait_time : float
-@export_range(0.0, 99.0) var wait_time_variance : float 
+@export_range(0.0, 99.0) var wait_time_variance : float
 
 
 func _ready() -> void:

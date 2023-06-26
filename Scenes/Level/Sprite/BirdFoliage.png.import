@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://74kkgrtwbnds"
-path="res://.godot/imported/Pond.png-229d5551ac769a6c4068209638c52883.ctex"
+uid="uid://b83462m33xvrn"
+path="res://.godot/imported/BirdFoliage.png-64e367b7681af416b27adb254cd83e0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Level/Sprite/Pond.png"
-dest_files=["res://.godot/imported/Pond.png-229d5551ac769a6c4068209638c52883.ctex"]
+source_file="res://Scenes/Level/Sprite/BirdFoliage.png"
+dest_files=["res://.godot/imported/BirdFoliage.png-64e367b7681af416b27adb254cd83e0e.ctex"]
 
 [params]
 

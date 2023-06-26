@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dpkuwn7mx7og2"]
+[gd_scene load_steps=25 format=3 uid="uid://dpkuwn7mx7og2"]
 
 [ext_resource type="PackedScene" uid="uid://c72l32fsdt8sd" path="res://Scenes/Birds/BirdAbstract/Bird.tscn" id="1_c7fei"]
 [ext_resource type="Texture2D" uid="uid://cibcyrgn1hyjt" path="res://Scenes/Birds/Duck/Sprites/Duck.png" id="2_70jmw"]
@@ -6,8 +6,8 @@
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/State.gd" id="3_6261f"]
 [ext_resource type="Script" path="res://Components/SeekDestComponent.gd" id="4_ttlop"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateEvent.gd" id="5_liocl"]
-[ext_resource type="Script" path="res://Scenes/Birds/FlyComponent.gd" id="5_vurg8"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateConnection.gd" id="6_8gq40"]
+[ext_resource type="Script" path="res://Components/MoveComponent.gd" id="8_cuh08"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qfnc1"]
 atlas = ExtResource("2_70jmw")
@@ -100,6 +100,17 @@ script = ExtResource("6_8gq40")
 to = NodePath("StateMachine/Idle")
 events = Array[ExtResource("5_liocl")]([SubResource("Resource_v4w3c")])
 
+[sub_resource type="Resource" id="Resource_vyfo5"]
+script = ExtResource("5_liocl")
+conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
+trigger = "stopped_moving"
+emitter_path = NodePath("../../FlyComponent")
+
+[sub_resource type="Resource" id="Resource_qwoco"]
+script = ExtResource("6_8gq40")
+to = NodePath("StateMachine/Idle")
+events = Array[ExtResource("5_liocl")]([SubResource("Resource_vyfo5")])
+
 [sub_resource type="Resource" id="Resource_fx1yp"]
 script = ExtResource("5_liocl")
 conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
@@ -132,7 +143,7 @@ wait_time_variance = 1.0
 default_state = NodePath("Floor")
 reset_to_default = true
 connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_jk6cv"), SubResource("Resource_5td17")])
-graph_position = Vector2(0.403037, 0.30315)
+graph_position = Vector2(0.220518, 0.178301)
 
 [node name="Floor" type="Node" parent="StateMachine/Idle" index="0"]
 script = ExtResource("3_6261f")
@@ -144,13 +155,13 @@ script = ExtResource("3_6261f")
 
 [node name="Fly" type="Node" parent="StateMachine" index="1"]
 script = ExtResource("3_6261f")
-connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_nq4fh")])
-graph_position = Vector2(0.689252, 0.622047)
+connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_qwoco")])
+graph_position = Vector2(0.475358, -0.0107153)
 
 [node name="Swim" type="Node" parent="StateMachine" index="2"]
 script = ExtResource("3_6261f")
 connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_ss2ln")])
-graph_position = Vector2(0.713785, 0.0433071)
+graph_position = Vector2(0.478547, 0.489366)
 
 [node name="StateAnimationHandler" parent="StateMachine" index="4"]
 anim_name_mode = 2
@@ -161,11 +172,11 @@ land_spots = 5
 holder = NodePath("..")
 
 [node name="FlyComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("holder")]
-script = ExtResource("5_vurg8")
+script = ExtResource("8_cuh08")
 holder = NodePath("..")
 
 [node name="SwimComponent" type="Node" parent="." index="4" node_paths=PackedStringArray("holder")]
-script = ExtResource("5_vurg8")
+script = ExtResource("8_cuh08")
 holder = NodePath("..")
 
 [connection signal="direction_changed" from="FlyComponent" to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]
