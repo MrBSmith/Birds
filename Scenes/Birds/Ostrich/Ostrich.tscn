@@ -86,10 +86,8 @@ z_index = -1
 position = Vector2(0, -36)
 sprite_frames = SubResource("SpriteFrames_mt8xl")
 
-[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("walk_component", "seek_spot_component", "wait_timer")]
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("wait_timer")]
 script = ExtResource("3_xnfjn")
-walk_component = NodePath("../../WalkComponent")
-seek_spot_component = NodePath("../../SeekLandSpotComponent")
 wait_timer = NodePath("Timer")
 avg_wait_time = 5.0
 wait_time_variance = 2.0

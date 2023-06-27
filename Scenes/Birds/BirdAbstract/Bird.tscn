@@ -1,5 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c72l32fsdt8sd"]
+[gd_scene load_steps=6 format=3 uid="uid://c72l32fsdt8sd"]
 
+[ext_resource type="Script" path="res://Scenes/Birds/BirdAbstract/Bird.gd" id="1_xcsbc"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/StateMachine.gd" id="6_wv1rv"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/StateLabel.gd" id="11_kjx2o"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/StateAnimationHandler/StateAnimationHandler.gd" id="12_387j2"]
@@ -14,6 +15,7 @@ animations = [{
 
 [node name="Bird" type="Node2D"]
 z_index = 6
+script = ExtResource("1_xcsbc")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_itey1")

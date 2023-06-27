@@ -1,13 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://dpkuwn7mx7og2"]
+[gd_scene load_steps=21 format=3 uid="uid://dpkuwn7mx7og2"]
 
 [ext_resource type="PackedScene" uid="uid://c72l32fsdt8sd" path="res://Scenes/Birds/BirdAbstract/Bird.tscn" id="1_c7fei"]
 [ext_resource type="Texture2D" uid="uid://cibcyrgn1hyjt" path="res://Scenes/Birds/Duck/Sprites/Duck.png" id="2_70jmw"]
 [ext_resource type="Script" path="res://Scenes/Birds/States/IdleState_Bird.gd" id="2_fmow7"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/State.gd" id="3_6261f"]
-[ext_resource type="Script" path="res://Components/SeekDestComponent.gd" id="4_ttlop"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateEvent.gd" id="5_liocl"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateConnection.gd" id="6_8gq40"]
-[ext_resource type="Script" path="res://Components/MoveComponent.gd" id="8_cuh08"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qfnc1"]
 atlas = ExtResource("2_70jmw")
@@ -112,7 +110,6 @@ to = NodePath("StateMachine/Idle")
 events = Array[ExtResource("5_liocl")]([SubResource("Resource_fx1yp")])
 
 [node name="Duck" instance=ExtResource("1_c7fei")]
-z_index = 6
 
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2(0, -13)
@@ -122,11 +119,8 @@ animation = &"IdleFloor"
 [node name="StateMachine" parent="." index="1"]
 connections_array = Array[ExtResource("6_8gq40")]([SubResource("Resource_jk6cv"), SubResource("Resource_5td17"), SubResource("Resource_nq4fh")])
 
-[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("fly_component", "swim_component", "seek_spot_component", "wait_timer", "default_state")]
+[node name="Idle" type="Node" parent="StateMachine" index="0" node_paths=PackedStringArray("wait_timer", "default_state")]
 script = ExtResource("2_fmow7")
-fly_component = NodePath("../../FlyComponent")
-swim_component = NodePath("../../SwimComponent")
-seek_spot_component = NodePath("../../SeekLandSpotComponent")
 wait_timer = NodePath("WaitTimer")
 avg_wait_time = 3.0
 wait_time_variance = 1.0
@@ -155,19 +149,3 @@ graph_position = Vector2(0.713785, 0.0433071)
 
 [node name="StateAnimationHandler" parent="StateMachine" index="4"]
 anim_name_mode = 2
-
-[node name="SeekLandSpotComponent" type="Node" parent="." index="2" node_paths=PackedStringArray("holder")]
-script = ExtResource("4_ttlop")
-land_spots = 5
-holder = NodePath("..")
-
-[node name="FlyComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("holder")]
-script = ExtResource("8_cuh08")
-holder = NodePath("..")
-
-[node name="SwimComponent" type="Node" parent="." index="4" node_paths=PackedStringArray("holder")]
-script = ExtResource("8_cuh08")
-holder = NodePath("..")
-
-[connection signal="direction_changed" from="FlyComponent" to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]
-[connection signal="direction_changed" from="SwimComponent" to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]
