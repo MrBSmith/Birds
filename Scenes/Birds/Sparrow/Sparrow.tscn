@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://dy5epydyhetu0"]
+[gd_scene load_steps=10 format=3 uid="uid://dy5epydyhetu0"]
 
 [ext_resource type="PackedScene" uid="uid://c72l32fsdt8sd" path="res://Scenes/Birds/BirdAbstract/Bird.tscn" id="1_cs6rt"]
 [ext_resource type="Texture2D" uid="uid://bv5v6kivyqph4" path="res://Scenes/Birds/Sparrow/Sprites/Sparrow.png" id="2_d41qn"]
+[ext_resource type="Script" path="res://Scenes/Birds/Sparrow/Sparrow.gd" id="2_k8ber"]
 [ext_resource type="Script" path="res://Scenes/Birds/States/IdleState_Bird.gd" id="7_s4sob"]
-[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateEvent.gd" id="8_x4kla"]
-[ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateConnection.gd" id="9_d452l"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/State.gd" id="10_1jurs"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3qgj"]
@@ -41,29 +40,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Resource" id="Resource_sjyv0"]
-script = ExtResource("8_x4kla")
-conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
-trigger = "started_moving"
-emitter_path = NodePath("../..")
-
-[sub_resource type="Resource" id="Resource_heetg"]
-script = ExtResource("9_d452l")
-to = NodePath("StateMachine/Fly")
-events = Array[ExtResource("8_x4kla")]([SubResource("Resource_sjyv0")])
-
-[sub_resource type="Resource" id="Resource_blsmj"]
-script = ExtResource("8_x4kla")
-conditions = Array[Resource("res://addons/StateGraph/StateMachine/Connexions/StateCondition.gd")]([])
-trigger = "stopped_moving"
-emitter_path = NodePath("../..")
-
-[sub_resource type="Resource" id="Resource_1kkdr"]
-script = ExtResource("9_d452l")
-to = NodePath("StateMachine/Idle")
-events = Array[ExtResource("8_x4kla")]([SubResource("Resource_blsmj")])
-
 [node name="Sparrow" instance=ExtResource("1_cs6rt")]
+script = ExtResource("2_k8ber")
 
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2(0, -8)
@@ -77,15 +55,11 @@ script = ExtResource("7_s4sob")
 wait_timer = NodePath("WaitTimer")
 avg_wait_time = 4.0
 wait_time_variance = 2.0
-connections_array = Array[ExtResource("9_d452l")]([SubResource("Resource_heetg")])
-graph_position = Vector2(0.607693, 0.295186)
+graph_position = Vector2(0.384562, 0.287312)
 
 [node name="WaitTimer" type="Timer" parent="StateMachine/Idle" index="0"]
 one_shot = true
 
 [node name="Fly" type="Node" parent="StateMachine" index="1"]
 script = ExtResource("10_1jurs")
-connections_array = Array[ExtResource("9_d452l")]([SubResource("Resource_1kkdr")])
-graph_position = Vector2(0.335304, 0.272519)
-
-[connection signal="direction_changed" from="." to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]
+graph_position = Vector2(0.716145, 0.296141)

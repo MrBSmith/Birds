@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cibcyrgn1hyjt"
-path="res://.godot/imported/Duck.png-233bc8de55e71c95639442d70d54ca93.ctex"
+path="res://.godot/imported/Duck.png-7f6c1b465a3da055a1ee77f487ffaa3b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Birds/Duck/Sprites/Duck.png"
-dest_files=["res://.godot/imported/Duck.png-233bc8de55e71c95639442d70d54ca93.ctex"]
+source_file="res://Scenes/Birds/SwimmingBirds/Duck/Sprites/Duck.png"
+dest_files=["res://.godot/imported/Duck.png-7f6c1b465a3da055a1ee77f487ffaa3b.ctex"]
 
 [params]
 

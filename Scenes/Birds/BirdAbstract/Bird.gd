@@ -3,6 +3,8 @@ class_name Bird
 
 @export_range(0.0, 9999.0) var speed : float = 200.0
 
+var current_spot : BirdSpot
+
 var direction := Vector2.RIGHT:
 	set(value):
 		if value != direction:
@@ -18,11 +20,10 @@ func move_to_spot(spot: BirdSpot) -> void:
 	spot.bird = self
 	
 	await fly(spot.global_position)
-	
 	started_moving.connect(spot.set.bind("bird", null), CONNECT_ONE_SHOT)
 
 
-func fly(to: Vector2) -> void:
+func _move_to(to: Vector2) -> void:
 	started_moving.emit()
 	
 	var tween = create_tween()
@@ -33,6 +34,13 @@ func fly(to: Vector2) -> void:
 	
 	await tween.finished
 	stopped_moving.emit()
+	
+	$StateMachine.set_state("Idle")
+
+
+func fly(to: Vector2) -> void:
+	$StateMachine.set_state("Fly")
+	await _move_to(to)
 
 
 func seek_spot() -> BirdSpot:

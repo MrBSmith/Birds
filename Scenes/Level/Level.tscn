@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://kl0yj0cvsfle"]
+[gd_scene load_steps=15 format=3 uid="uid://kl0yj0cvsfle"]
 
 [ext_resource type="Texture2D" uid="uid://y60vc75ji1jg" path="res://Scenes/Level/Sprite/BirdBackground.png" id="1_8s2wt"]
 [ext_resource type="Texture2D" uid="uid://oai4yjpkbxxs" path="res://Scenes/Level/Sprite/BirdBranches.png" id="2_738kt"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://csjxc788frim2" path="res://Scenes/BirdSpot/BirdSpot.tscn" id="3_uckby"]
 [ext_resource type="Texture2D" uid="uid://b83462m33xvrn" path="res://Scenes/Level/Sprite/BirdFoliage.png" id="3_wc467"]
 [ext_resource type="PackedScene" uid="uid://dy5epydyhetu0" path="res://Scenes/Birds/Sparrow/Sparrow.tscn" id="4_im8iu"]
+[ext_resource type="PackedScene" uid="uid://dpkuwn7mx7og2" path="res://Scenes/Birds/Duck/Duck.tscn" id="5_flcm4"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y8vbg"]
 frequency = 0.005
@@ -130,3 +131,7 @@ position = Vector2(299, 39)
 
 [node name="Sparrow3" parent="Birds" instance=ExtResource("4_im8iu")]
 position = Vector2(19, 134)
+
+[node name="Duck" parent="Birds" instance=ExtResource("5_flcm4")]
+position = Vector2(293, 113)
+speed = null

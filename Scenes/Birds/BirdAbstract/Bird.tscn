@@ -37,3 +37,5 @@ script = ExtResource("12_387j2")
 animated_sprite = NodePath("../../AnimatedSprite")
 anim_name_mode = 0
 flip_mode = 1
+
+[connection signal="direction_changed" from="." to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://qx44bntx5nah"]
+[gd_scene load_steps=17 format=3 uid="uid://qx44bntx5nah"]
 
 [ext_resource type="PackedScene" uid="uid://c72l32fsdt8sd" path="res://Scenes/Birds/BirdAbstract/Bird.tscn" id="1_j40vl"]
 [ext_resource type="Texture2D" uid="uid://db0r1spvs7dcg" path="res://Scenes/Birds/Ostrich/Sprites/Ostrich.png" id="2_nd56h"]
@@ -6,8 +6,6 @@
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateEvent.gd" id="4_4rsly"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/State.gd" id="4_gqgkf"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateConnection.gd" id="5_gdklw"]
-[ext_resource type="Script" path="res://Components/MoveComponent.gd" id="7_habbl"]
-[ext_resource type="Script" path="res://Components/SeekDestComponent.gd" id="8_hgukr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jr20p"]
 atlas = ExtResource("2_nd56h")
@@ -102,14 +100,3 @@ one_shot = true
 script = ExtResource("4_gqgkf")
 connections_array = Array[ExtResource("5_gdklw")]([SubResource("Resource_lm7x1")])
 graph_position = Vector2(0.558411, 0.354331)
-
-[node name="WalkComponent" type="Node" parent="." index="2" node_paths=PackedStringArray("holder")]
-script = ExtResource("7_habbl")
-holder = NodePath("..")
-
-[node name="SeekLandSpotComponent" type="Node" parent="." index="3" node_paths=PackedStringArray("holder")]
-script = ExtResource("8_hgukr")
-land_spots = 2
-holder = NodePath("..")
-
-[connection signal="direction_changed" from="WalkComponent" to="StateMachine/StateAnimationHandler" method="_on_direction_changed"]

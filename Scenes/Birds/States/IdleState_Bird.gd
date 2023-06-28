@@ -15,6 +15,8 @@ func _ready() -> void:
 
 
 func enter_state() -> void:
+	super.enter_state()
+	
 	if wait_timer:
 		wait_timer.start(randfn(avg_wait_time, wait_time_variance))
 
