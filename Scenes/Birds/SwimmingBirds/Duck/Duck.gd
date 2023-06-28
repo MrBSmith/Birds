@@ -1,2 +1,2 @@
-extends SwimmingBird
+extends FlyingSwimmingBird
 class_name Duck

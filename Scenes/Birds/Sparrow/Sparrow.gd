@@ -1,2 +1,2 @@
-extends Bird
+extends FlyingBird
 class_name Sparrow

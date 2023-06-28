@@ -17,10 +17,7 @@ signal direction_changed(dir: Vector2)
 
 
 func move_to_spot(spot: BirdSpot) -> void:
-	spot.bird = self
-	
-	await fly(spot.global_position)
-	started_moving.connect(spot.set.bind("bird", null), CONNECT_ONE_SHOT)
+	pass
 
 
 func _move_to(to: Vector2) -> void:
@@ -36,11 +33,6 @@ func _move_to(to: Vector2) -> void:
 	stopped_moving.emit()
 	
 	$StateMachine.set_state("Idle")
-
-
-func fly(to: Vector2) -> void:
-	$StateMachine.set_state("Fly")
-	await _move_to(to)
 
 
 func seek_spot() -> BirdSpot:

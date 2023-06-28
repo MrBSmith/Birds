@@ -1,0 +1,2 @@
+extends WalkingBird
+class_name Ostrich

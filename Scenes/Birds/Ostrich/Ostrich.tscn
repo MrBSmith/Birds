@@ -1,6 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://qx44bntx5nah"]
+[gd_scene load_steps=18 format=3 uid="uid://qx44bntx5nah"]
 
 [ext_resource type="PackedScene" uid="uid://c72l32fsdt8sd" path="res://Scenes/Birds/BirdAbstract/Bird.tscn" id="1_j40vl"]
+[ext_resource type="Script" path="res://Scenes/Birds/Ostrich/Ostrich.gd" id="2_kv56o"]
 [ext_resource type="Texture2D" uid="uid://db0r1spvs7dcg" path="res://Scenes/Birds/Ostrich/Sprites/Ostrich.png" id="2_nd56h"]
 [ext_resource type="Script" path="res://Scenes/Birds/States/IdleState_Bird.gd" id="3_xnfjn"]
 [ext_resource type="Script" path="res://addons/StateGraph/StateMachine/Connexions/StateEvent.gd" id="4_4rsly"]
@@ -79,6 +80,7 @@ events = Array[ExtResource("4_4rsly")]([SubResource("Resource_2p18l")])
 
 [node name="Ostrich" instance=ExtResource("1_j40vl")]
 z_index = -1
+script = ExtResource("2_kv56o")
 
 [node name="AnimatedSprite" parent="." index="0"]
 position = Vector2(0, -36)
